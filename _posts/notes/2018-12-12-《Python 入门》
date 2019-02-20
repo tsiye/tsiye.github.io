@@ -1,0 +1,499 @@
+---
+layout: post
+title: 《Python入门》读书笔记
+category: 读书笔记
+tags: Python
+---
+# python 入门笔记
+## 算数 字符串 变量 
+1. import math Vs. from math import *
+后者会覆盖掉用户自己定义的函数
+2. **字符串长度** len('') 
+**字符串拼接** ('') + ('')
+**字符串运算** 3*('')
+> print中‘+’和‘,’的区别
+加号一般用于同类型的加和，而且中间是无缝的
+逗号则可以连接不同类型的元素
+~~~
+print('zwf',5+5,1>3)
+结果
+zwf 10 false
+~~~
+3. 获取帮助 
+	- import math
+	dir(math)#列出模块中的所有函数
+	- print(xxx.__doc__)
+4. 类型转换
+str()
+int()
+float()
+取整：
+round()
+math.trunc()
+math.ceil()
+math.floor()
+5. 多重赋值
+x, y, z = 1, 'two', 3.0
+## 编写程序
+### Python由三个主要部分组成
+ 	- 运行语言的解释器
+ 	- 将.py文件转换为.pyc文件的编译器
+ 	- 运行.pyc文件的虚拟机
+### 从键盘读取字符串 
+~~~
+#name.py
+ name = input('what is your name?')
+ print('Hello ' + name.capitalize().strip() + '!')#capitalize：将首字母大写，strip：去掉头尾的空格
+~~~
+## 流程控制
+###  if语句
+~~~
+#password.py
+pwd = input('what is the password?')
+if password == 'apple'
+	print('logging on...... ')
+else:
+	print('Incorrect password.')
+print('All done')
+~~~
+
+~~~
+# airfare.py
+age = int(input('How old are you? '))
+if age <= 2:
+	print(' free')
+elif 2 < age < 13:
+	print('Child fare')
+else:
+	print(' adult fare')
+~~~
+
+条件表达式 相当与if语句的缩写
+
+~~~
+food = input('what is your favorite food?')
+reply = 'yuck' if food == 'lamb' else 'yum'
+~~~
+### while循环
+~~~
+while i < 10:
+	print(i)
+	i = i + 1
+~~~
+`while true: `为无限循环
+
+### for循环
+~~~
+for i in range(10) :
+	print(i)
+for i in range(10, 0 , -1)#第一个参数为10，第二个参数为0，第三个参数为-1
+	print(i)
+~~~
+## 函数
+> 如果不小心给函数名赋了值，就无法访问其原来指向的函数，必须要重启Python
+> 没有return 的函数默认以`return none`结尾
+~~~
+#area.py
+import math
+def area(radius):#pay attention to the ':'
+return math.pi * radius ** 2
+~~~
+### 局部变量和全局变量
+> 局部变量:在函数中第一次出现的变量
+> 全局变量定义在函数外， 要修改全局变量先用global调出
+~~~
+#global variable.py
+name = 'Jack'
+def say_hello():
+	print('Hello ' + name + '!')
+def change_name(new_name):
+	global name 
+	name = new_name
+~~~
+### main 函数
+> 通常认为main()是程序的起点`def main():`
+### 模块
+模块与普通python程序唯一区别是用途不同：模块是一个由函数组成的工具箱，用于编写其他程序，模块通常没有main函数
+import用于导入模块，利用`dir(module)`查看模块中的内容
+### 名称空间
+不同的合作者可能会有相同的函数头但是功能截然不同的函数。
+而不同开发者的模块可以形成不同的命名空间，避免函数名冲突。
+这也是我们一般用`import ......`不用`from ...... import *`的原因
+##字符串
+### 字符串索引
+> 为什么索引从0开始？
+很经典的问题。
+首先，索引可以用于测量与字符串第一个字符的距离，就像一把尺子。
+其次，也与函数%(求余)一致
+
+~~~
+>>> s = 'apple'
+>>> s[0]
+'a'
+>>> s[2]
+'p'
+>>> s[-1]#负数索引 相当于s[len - 1]
+'e'
+>>> s[-5]
+'a'
+~~~
+
+~~~
+#codesum.py
+def codesum(s):
+"""
+return the sums of the character code of s
+"""
+total = 0
+for c in s:
+	total = total + ord(c)
+return total
+
+#codesum2.py
+def codesum2(s)
+toal = 0
+for i in range(len(s))
+	total = total + ord(s[i])
+return total
+~~~
+### 字符
+使用`ord()`获取字符的相应的字符编码，字符编码由unicode分配
+使用`chr()`获取字符编码对应的字符
+~~~
+>>> char('a')
+97
+>>> chr
+‘a’
+~~~
+> 转义字符: 在字符前加上\ **转义字符是单个字符**
+windows是以\r\n表示行尾
+OS X和Linux使用\n表示行尾
+Windows记事本无法识别行尾标记
+
+### 字符串切片
+> 要对一个字符串切片，可指定两个索引：第一个是要提取的第一个字符的索引，以及要提取的最后一个字符的索引+1
+~~~
+>>> food = 'apple pie'
+>>> food[0:5]
+'apple'
+>>> food[6:9]
+'pie'
+>>> food[:5]
+'apple'
+>>> food[6:]
+'pie'
+>>>  food[:]
+'apple pie'
+~~~
+常用的标准字符串函数
+dir(' ')
+
+### 正则表达式
+`xy?`表示字符串是可选的  描述的字符串：x、xy
+`x|y`描述x、y
+`x*`描述‘ ’、x、xx、xxx
+`x+`描述x、xx、xxx
+##数据结构
+### type命令
+可以获取值或者变量的数据类型
+~~~
+>>> type(5)
+<class 'int'>
+~~~
+### 序列 sequence
+> Python有三种内置的序列类型：**字符串**,**列表**,**元组**
+从理论上来说， 序列的长度不受限制，可以根据需要包含任意数量的元素
+
+	序列的用法
+	1. 第一个索引为0，指向左端;第一个负索引为-1，指向右端
+	2. 切片
+	3. 可以使用+和×进行合并，但是不能拼接类型不同的元素
+	4. 使用len()计算长度
+	5. 表达式`x in s`， 检查序列s中是否包含x
+
+### 元组 tuple
+> 一种不可变序列 可以包含任何Python值，甚至可以包含其他元组 
+~~~
+>>> item = (-6, 'cat', (1,2))
+>>> item
+(-6, 'cat', (1, 2))
+>>> item[-1]
+(1, 2)
+>>> item[-1][1]
+2
+~~~
+> 元组用圆括号扩起，其中的元素用逗号分隔。空元组用()表示，只包含一个元素的元组用(x,)表示
+~~~
+>>> type(())
+<class 'tuple'>
+>>> type((5,))
+<class 'tuple'>
+>>> type((5))
+<class 'int'>
+~~~
+>1. 元组是不可变的，创建之后就不能修改
+2. 如果要求改元组就必须创建一个体现更改的新的元组 频繁修改会大大增加所需的时间和内存
+3. 如果要大量修改 那么应该用**列表**代替
+~~~
+>>> pets = ('dog', 'cat', 'bird', 'dog')
+>>> pets
+('dog', 'cat', 'bird', 'dog')
+>>> 'bird' in pets
+True
+>>> len(pets)
+4
+>>> pets.count('dog')
+2
+>>> pets.index('cat')
+1
+>>> 2 * pets
+('dog', 'cat', 'bird', 'dog', 'dog', 'cat', 'bird', 'dog')
+~~~
+### 列表
+> 列表与元组基本相同，唯一区别是列表可变，元组用的很少(string 和 strinBuffer/stringBuilder？？)
+> 列表用方括号扩起，用逗号分隔
+~~~
+>>> lst = [3,(1,), 'dog', 'cat']
+>>> lst
+[3, (1,), 'dog', 'cat']
+>>> lst[1:3]
+[(1,), 'dog']
+>>> lst[1] = 'fuck'
+>>> lst
+[3, 'fuck', 'dog', 'cat']
+>>> lst[1] = lst
+>>> lst
+[3, [...], 'dog', 'cat'] #自引用
+~~~
+- 列表常见函数
+~~~
+s.append(x)	#在列表末尾添加元素x
+s.count(x)	#返回元素x在s中出现的次数
+s.extend(lst)	#将lst中的所有元素都添加到列表s末尾
+s.index(x)	#返回第一个x元素的索引
+s.insert(i,x)	#将元素x插入到索引i指定的元素前面，结果是s[i] == x
+s.pop(i)	#删除并返回s中索引为i的元素
+s.remove(x)	#删除s中的第一个x元素
+s.reverse()	#翻转s中元素的排列顺序
+s.sort()	#从低到高排列
+#reverse 和 sort都是在现有数组上直接进行
+~~~
+- 列表解析
+~~~
+>>> [n*n for n in range(1,11)]
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+#改造现有列表
+>>> [c.upper() for c in 'pizza']
+['P', 'I', 'Z', 'Z', 'A']
+#剔除不想要的元素1
+>>> nums = [-1,0,6,-4,-2,-3]
+>>> nums
+[-1, 0, 6, -4, -2, -3]
+>>> result = [n for n in nums if n > 0]
+>>> result
+[6]
+#剔除不想要的元素2
+>>> s = 'Apple Sauce'
+>>> result = ''.join([c for c in s if c.lower() not in 'aeiou']) #使用join将字符串列表拼接成一个字符串返回
+>>> result
+'ppl Sc'
+~~~
+###字典(关联数组 映射 散列表)
+> 字典由一个个键值对组成
+~~~
+>>>color = {'red' : 1, 'blue': 2, 'green': 3}
+>>>color
+{'blue':2, 'green':3, 'red':4}
+>>>color ['red'] #使用键来访问值
+1
+~~~
+>使用键值对访问字典的效率极高
+> 字典中的键都是独一无二的，同一个字典中，任何连个键值对的键都不能相同
+> 值可以使可变的，相同的值可以在一个字典里出现多次
+- 字典中的常用函数
+~~~
+d.items() #返回一个由字典d的key - value 对组成的视图
+d.keys()
+d.values()
+#items keys values 都返回一个特殊对象--视图    视图被链接到原字典，原字典变化，视图随之变化
+d.get(key)
+d.pop(key) #删除键并返回与之相关联的值
+d.popitem()
+d.clear() #删除d中的所有元素
+d.copy() #复制字典
+d.fromkeys(s, t) #创建一个新字典 键来自s，值来自t
+d.setdedault(key, v) #键key包含在字典d中，则返回其值；否则返回v，并将(key,v)添加到字典d中
+d.update(e) #将e中的键值对添加到字典中；e可能是字典也可能是键值对序列
+~~~
+###集合
+集合类似于字典，但是只包含键，而没有相关联的值
+如果使用了字典，但不关心其值，转而使用集合可以提高效率
+##I/O
+###字符串插入
+字符串插入表达式总是采用格式：`format % values`的格式
+~~~
+>>> x = 1/81
+>>> print(x)
+0.012345679012345678
+>>> print('value:%.2f' % x)
+value:0.01
+>>> print('value:%.5f' % x)
+value:0.01235
+>>> print('value:%.5e' % x)
+value:1.23457e-02
+~~~
+> f和e被称为**转换说明符**，o,x分别将值转换为八进制和十六进制	
+格式字符串相当于简单的模板，将用制定的值填充
+~~~
+>>> a,b,c='cat',3.14,6
+>>> s = 'There\'s %d %ss older than %.2f years' % (c,a,b) #以元组的方式传递
+>>> s
+"There's 6 cats older than 3.14 years"
+~~~
+###格式字符串
+使用函数format
+在格式字符串中，用大括号引起的内容都将被替换，这被称为命名替换(named replacement)
+~~~
+>>> '1/81 = {x}'.format(x = 1/81)
+'1/81 = 0.012345679012345678'
+>>> '1/81 = {x:f}'.format(x = 1/81)
+'1/81 = 0.012346'
+>>> '1/81 = {x:.3f}'.format(x = 1/81)
+'1/81 = 0.012'
+>>> 'num = {x:.{d}f}'.format(x = 1/81, d = 3)
+'num = 0.012'
+~~~
+相比于字符串插入，格式字符串更灵活，更强大，适合庞大而复杂的任务，如创建网页或格式邮件
+###读写文件
+> 文件是命名的比特集合，分为两类：**文本文件**和**二进制文件**
+>1. 文本文件:基本上是磁盘中的字符串，Python源代码和HTML文件属于文本文件。可以使用任何文本编辑器编辑，对人类来说容易解读，但是对程序来说很难。通常比等价的二进制文件大，通过网络发送大型文本文件时，需要进行**压缩**
+>2. 二进制文件:人类无法阅读，占据的空间小，对程序来说读写容易。通常与特定的程序相关联。
+###文件夹
+~~~
+>>> import os
+>>> os.getcwd()
+'/home/yeyuan/myPython/try/file'
+~~~
+###处理文本文件
+- 逐行处理文本文件
+~~~
+  1 #printfile.py
+  2 def print_file1(fname):
+  3     f = open(fname, 'r')
+  4     for line in f:
+  5         print(line, end = '')
+  6     f.close()
+  #f是一个局部变量，结束时Python将自动关闭并删除f指向的文件对象
+~~~
+>'r' 为读取而打开文件(默认)
+‘w’ 为写入而打开文件
+’a‘ 为在文件末尾附加而打开文件
+’b‘ 二进制模式
+’t‘ 文本模式(默认)
+’r+‘ 为读写打开文件
+
+- 将整个文本文件作为一个字符串进行读取
+可能会大量占用内存
+~~~
+ 1 def print_file2(fname):
+ 2     f = open(fname, 'r')
+ 3     print(f.read())
+ 4     f.close()
+ 5     #ptint(open(fname, 'r').read())
+~~~
+- 写入文本文件
+~~~
+  1 #write.py
+  2 import os
+  3 #写入文件
+  4 def write_file():
+  5 #避免覆盖已存在的文件
+  6     if os.path.isfile('story.txt'):
+  7         print('story.txt already exits.')
+  8     else: 
+  9         f = open('story.txt', 'w')
+ 10         f.write('Mary had a little lamb,\n')
+ 11         f.write('and then she had some more\n')
+ 12 
+ 13 #附加到文本文件末尾
+ 14 def add_to_file(line, fname = 'story.txt'):
+ 15     f = open(fname, 'a')
+ 16     f.write(line)
+ 17     
+ 18 #将字符串插入到文件开头
+ 19 def insert_title(title, fname = 'sroty.txt'):
+ 20     f = open(fname, 'r+')
+ 21     temp = f.read() #将文件读取到字符串变量temp中
+ 22     temp = title + '\n\n' + temp #字符串拼接插入标题
+ 23     f.seek(0) #让文件指针指向文件开头(调用read()后，指针指向文件末尾)
+ 24     f.write(temp)
+~~~
+- 处理二进制文件
+pickle
+- 读取网页
+##异常处理
+> Python如果出现异常，如果不捕获或者以其他方式处理，将立即停止运行程序，并显示栈跟踪——异常发生前的函数调用情况
+###try/except
+~~~
+def convert_to_int3(s,base):
+	try:
+		return int(s,base)
+	except:
+		retnrn 'error'
+	#finally:
+	#通常将关闭文件放其中确保文件可以关闭
+~~~
+###with
+~~~
+num = 1
+with open(fname, 'r') as f:
+	for line in f:
+	print('%04d %s' % (num, line), end = ' ')
+	num = num + 1
+~~~
+##面向对象OOP
+###编写类
+~~~
+#person.py
+class Person:
+"""Class to represent a person
+"""
+def __init__(self):
+	self.name = ''
+	self.age = 0
+~~~
+Person类定义了person对象包含的数据和函数，其唯一一个函数是\__init\__,在类中被定义的函数称之为方法。方法的第一个参数必须是**self**.
+要创建Person对象，只需要调用Person(),这导致Python运行Person的函数__init__，并返回一个新的Person对象。要访问对象的变量或者用方法，用句点表示法。
+
+- 参数self
+在OOP中self是一个指向对象本身的变量。(相当于Java中的this)
+遵循Python的标准做法，将__init__第一个参数命名为self
+###显示对象
+~~~
+  1 #person.py
+  2 class Person:
+  3     """Class to represent a person
+  4     """
+  5     def __init__(self):
+  6         self.name = ''
+  7         self.age = 0
+  8     def display(self):
+  9         print("Person('%s',%d)" % (self.name, self.age))
+~~~
+~~~
+>>> from person import Person
+>>> p = Person()
+>>> p
+<person.Person object at 0x7fd3506f3908>
+>>> p.display()
+Person('',0)
+>>> p.name = 'Bill'
+>>> p.age = 20
+>>> p.display()
+Person('Bill',20)
+~~~
+Python 提供了特殊方法用于生成对象的字符串表示
+~~~
+def __str__(self)
+	return "Person('%s', %d)" % (self.name, self.age)
+~~~
