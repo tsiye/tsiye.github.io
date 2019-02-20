@@ -7,6 +7,7 @@ tags: Python
 # python main 函数
 ## 在当前module里的main
 1. Python中没有不会像Java一样去找main(),会直接自上而下执行程序
+
 ~~~
 # hello.py
 print("first")
@@ -21,15 +22,18 @@ if __name__ == "__main__":
     sayHello()
     print(__name__+'from hello.main')
 ~~~
+
 运行结果
 > first
 This is main of module "hello.py"
 __main__from hello.main
 
 可以看见先执行第一行再到`if __name__ == "__main__"`
+
 ## if \__name\__ == "\__main\__"
 1. \__name\__为内置属性，在当前module中，不管是那个位置\__name\__属性，其值都是\__main\__
 2. 当前的文件作为模块被导入其他文件时，\__name\__的值就为当前的py文件名（import hello_world.py, 那么\__name\__就是hello_world）
+
 ~~~
 import hello#上一个例子的hello.py
  
@@ -38,7 +42,9 @@ if __name__ == "__main__":
     hello.sayHello()
     print(__name__)
 ~~~
+
 运行结果
+
 > first
 This is main of module "world.py"
 hello
@@ -50,6 +56,7 @@ hellofrom hello.sayhello()
 - 所谓的入口其实也就是个if条件语句，判断成功就执行一些代码，失败就跳过。没有java等其他语言中那样会有特定的内置函数去识别main()方法入口，在main()方法中从上而下执行
 
 [知乎示例](https://www.zhihu.com/question/49136398)
+
 ~~~
 # const.py
 PI = 3.14
