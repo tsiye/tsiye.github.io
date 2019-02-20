@@ -50,7 +50,7 @@ $(function() {
     // discus comment.
     {% if site.disqus.shortname %}
       var ds_loaded = false;
-      window.disqus_shortname = "{{ site.disqus.shortname }}";
+      window.disqus_shortname = "{{ chiyuanye.disqus.shortname }}";
       main.scroll(function(){
         var nScrollHight = $(this)[0].scrollHeight;
         var nScrollTop = $(this)[0].scrollTop;
