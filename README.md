@@ -1,6 +1,6 @@
 ### 我的博客
 
-地址：[http://chiyuanye.con](http://chiyuanye.com)
+地址：[http://chiyuanye.com](http://chiyuanye.com)
 
 ### 安装说明
 
