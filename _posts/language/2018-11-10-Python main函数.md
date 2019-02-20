@@ -9,7 +9,7 @@ tags: Python
 1. Python中没有不会像Java一样去找main(),会直接自上而下执行程序
 
 ~~~
-# hello.py
+#hello.py
 print("first")
  
 def sayHello():
