@@ -10,43 +10,43 @@ tags: Python
 > 装饰器本质上就是一个返回函数的高阶函数
 ## 简单的装饰器
 
-~~~
+```python
 def now():
      print('2015-3-25')
-~~~
+```
 
 现在我们想要增强now()的功能，但是又不想更改now()函数的定义，**这种在代码运行期间动态增加功能的方式**，称为**decorator**
 
-~~~
+```python
 def log(func):#log就是一个decorator，能够接受一个函数，返回一个函数
     def wrapper(*args, **kw):
         print('call %s():' % func.__name__)
         return func(*args, **kw)
     return wrapper
-~~~
+```
 
 现将log添加在`now()`前面
 
-~~~
+```python
 @log
 def now():
     print('2015-3-25')
-~~~
+```
 
 这里的`@log`相当于`now = log(now)`
 输出为
 
-~~~
+```python
 call now():
 2015-3-25
-~~~
+```
 
 当装饰器本身需要参数输入需要三层嵌套
 同时需要修改函数名字，否则有些设计签名的程序可能会出错
 
 ## 可以传递参数的装饰器
 
-~~~
+```python
 # This is our simple decorator
 def simple_decorator(f):
     # This is the new function we're going to return
@@ -60,7 +60,7 @@ def simple_decorator(f):
 def hello():
     print "Hello World"
 hello()
-~~~
+```
 
 运⾏上述代码会输出以下结果：
 Entering Function
@@ -69,7 +69,7 @@ Exited Function
 
 我们这个时候可以外加一个函数用来传递参数
 
-~~~
+```python
 def decorator_factory(enter_message, exit_message):
     # We're going to return this decorator
     def simple_decorator(f):
@@ -82,7 +82,7 @@ def decorator_factory(enter_message, exit_message):
 @decorator_factory("Start", "End")
 def hello():
     print "Hello World"
-~~~
+```
 
 给我们的输出是：
 Start

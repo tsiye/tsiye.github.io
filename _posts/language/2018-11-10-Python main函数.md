@@ -4,11 +4,11 @@ title: Python main函数
 category: language
 tags: Python
 ---
-# python main 函数
+
 ## 在当前module里的main
 1. Python中没有不会像Java一样去找main(),会直接自上而下执行程序
 
-~~~
+```python
 #hello.py
 print("first")
  
@@ -21,7 +21,7 @@ if __name__ == "__main__":
     print ('This is main of module "hello.py"')
     sayHello()
     print(__name__+'from hello.main')
-~~~
+```
 
 运行结果
 > first
@@ -34,14 +34,14 @@ __main__from hello.main
 1. \__name\__为内置属性，在当前module中，不管是那个位置\__name\__属性，其值都是\__main\__
 2. 当前的文件作为模块被导入其他文件时，\__name\__的值就为当前的py文件名（import hello_world.py, 那么\__name\__就是hello_world）
 
-~~~
+```python
 import hello#上一个例子的hello.py
  
 if __name__ == "__main__":
     print ('This is main of module "world.py"')
     hello.sayHello()
     print(__name__)
-~~~
+```
 
 运行结果
 
@@ -57,7 +57,7 @@ hellofrom hello.sayhello()
 
 [知乎示例](https://www.zhihu.com/question/49136398)
 
-~~~
+```python
 # const.py
 PI = 3.14
 
@@ -77,4 +77,4 @@ print "round area: ", calc_round_area(2)
 
 if __name__ == "__main__"#如果不加则会同时输出const.py中的main函数
 main()	
-~~~
+```
