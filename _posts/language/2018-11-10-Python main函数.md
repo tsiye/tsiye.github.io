@@ -3,6 +3,7 @@ layout: post
 title: Python main函数
 category: language
 tags: Python
+syntax: gruvbox
 ---
 
 ## 在当前module里的main
