@@ -1,3 +1,11 @@
+---
+layout: post
+title: spider lab2
+category: web
+tags: spider
+---
+
+
 # spider lab 2
 ## 问题1
 在获取各个子链接时报错：TypeError: _wrap_socket() argument 1 must be _socket.socket, not SSLSocket

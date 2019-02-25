@@ -1,3 +1,12 @@
+---
+layout: post
+title: spider lab
+category: web
+tags: spider
+---
+
+
+
 # 爬虫实战 基础知识积累
 ## MongoEngine v.s. PyMongo
 1. PyMongo 是较为低级 MongoDB 的 Python 驱动器， 封装了 MongoDB API， 并通过 JSON 与 MongoDB 通信， 将 MongoDB 的类型映射成 Python 的基本类型
