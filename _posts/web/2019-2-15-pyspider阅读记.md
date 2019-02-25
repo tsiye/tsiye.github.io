@@ -37,13 +37,13 @@ http请求交由tornado框架中的httpclient完成，这个client是异步的�
 首先进行配置的读取，数据库的连接，远程服务器的连接。
 函数cli()做了一些准备工作
 其创建了一个字典，放入了各种各样的变量信息，存储在ctx.obj中
-```
+```python
 ctx.obj = utils.ObjectDict(ctx.obj or {})
 ctx.obj['instances'] = []
 ctx.obj.update(kwargs)
 ```
 在后面的函数中
-```
+```python
 g = ctx.obj
 g.instances.append(fetcher)
 ```
