@@ -11,9 +11,10 @@ Scheduler负责任务调度，Fetcher负责抓取网页内容，Processor负责�
 
 # 库以及组件的理解
 1. six模块：专用于兼容Python2 和Python3兼容性的库
-2. phantomjs是一个著名的headless browser，提供了大量的API，用于网站的程序化控制。
+2. phantomjs是一个著名的headless browser，提供了大量的API，用于网站的程序化控制。这里用来在fetcher部分解析Javascript网页
 3. click: python的一个快速创建命令行的第三方模块，其对于Argparse就好比requests相对于urllib，@click.command()装饰一个函数，使之成为命令行的节后，@click.option()添加命令行选项。[欢迎查阅 Click 中文文档](https://click-docs-zh-cn.readthedocs.io/zh/latest/)
 4. xmlrpc:使用http协议作为传输协议的rpc机制。
+5. logging模块: 一个日志模块
 
 # 语法的理解
 1. python中`*args`相当于是一个tuple，`**kargs`相当于是一个dictionary, ctx貌似是传递上下文内容的一个tuple
@@ -49,4 +50,27 @@ g.instances.append(fetcher)
 ```
 基本上就做好了一系列的配置
 
-`load_cls`是从lib.utils里的`load_object`来的
+## scheduler(),fetcher(),processor(),result_worker(),webui()
+1. 一开始先`load_cls`,看到定义
+```python
+def load_cls(ctx, param, value):
+	if isinstance(value, six.string_types):#看value是否为string类型
+		return utils.load_object(value)
+    return value
+```
+```python
+#utils.py
+def load_object(name):
+	"""Load object from module"""
+	if "." not in name:
+        raise Exception('load object need module.object')
+    module_name, object_name = name.rsplit('.', 1)#从字符串后面开始分隔，1次
+    if six.PY2:
+        module = __import__(module_name, globals(), locals(), [utf8(object_name)], -1)
+    else:
+        module = __import__(module_name, globals(), locals(), [object_name])#__import__用于动态加载模块
+    return getattr(module, object_name)
+```
+传入一个实例`pyspider.webui.app.app`，加载实例app中的属性值
+
+	
