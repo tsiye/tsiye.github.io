@@ -1,0 +1,22 @@
+---
+layout: post
+title: Python提高班
+category: language
+tags: Python
+---
+
+时常巩固语法，学习新概念
+
+## 复习可迭代对象，迭代器，生成器
+除了list和tuple，其他的只要是可迭代对象，无论有无下标，都可以进行迭代。
+比如dict: 
+```python
+>>> d = {'a': 1, 'b': 2, 'c': 3}
+>>> for key in d:
+...     print(key)
+...
+a
+c
+b
+
+```
