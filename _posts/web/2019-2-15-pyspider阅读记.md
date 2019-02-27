@@ -73,4 +73,13 @@ def load_object(name):
 ```
 传入一个实例`pyspider.webui.app.app`，加载实例app中的属性值
 
+## all()
+开线程，调度上述所有模块
+
+## bench()
+在bench模式下，仅仅使用在内存中的数据库，而非存储在硬盘的数据库，可以看到其中并没有连接数据库的命令。
+
+## one()
+所有任务都放在一个进程下进行，用tornado.ioloop循环处理。
+debug用
 	
