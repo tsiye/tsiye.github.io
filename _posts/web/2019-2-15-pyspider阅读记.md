@@ -37,7 +37,7 @@ http请求交由tornado框架中的httpclient完成，这个client是异步的�
 先从主项目的入口点开始分析。
 首先进行配置的读取，数据库的连接，远程服务器的连接。
 函数cli()做了一些准备工作
-其创建了一个字典，放入了各种各样的变量信息，存储在ctx.obj中
+其创建了一个字典，放入了连接数据库`taskdb`，`projectdb`，`resultdb`的环境变量，message queue的环境信息，将'newtask_queue', 'status_queue', 'scheduler2fetcher', 'fetcher2processor', 'processor2result'放在其中，还创建好了phantomjs的信息，存储在ctx.obj中
 ```python
 ctx.obj = utils.ObjectDict(ctx.obj or {})
 ctx.obj['instances'] = []
@@ -50,7 +50,7 @@ g.instances.append(fetcher)
 ```
 基本上就做好了一系列的配置
 
-## scheduler(),fetcher(),processor(),result_worker(),webui()
+## scheduler()
 1. 一开始先`load_cls`,看到定义
 ```python
 def load_cls(ctx, param, value):
@@ -72,6 +72,45 @@ def load_object(name):
     return getattr(module, object_name)
 ```
 传入一个实例`pyspider.webui.app.app`，加载实例app中的属性值
+
+2. 传入cli()中的字典，scheduler = Scheduler(**kwargs)
+```python
+kwargs = dict(taskdb=g.taskdb, projectdb=g.projectdb, resultdb=g.resultdb,
+                  newtask_queue=g.newtask_queue, status_queue=g.status_queue,
+                  out_queue=g.scheduler2fetcher, data_path=g.get('data_path', 'data'))
+```
+
+添加基本参数
+
+```python
+    scheduler.INQUEUE_LIMIT = inqueue_limit
+    scheduler.DELETE_TIME = delete_time
+    scheduler.ACTIVE_TASKS = active_tasks
+    scheduler.LOOP_LIMIT = loop_limit
+    scheduler.FAIL_PAUSE_NUM = fail_pause_num
+```
+
+3. 如果有xmlrpc的话开一个线程run起来～，这个应该是针对命令行来说，webUI不影响
+```python
+if xmlrpc:
+        utils.run_in_thread(scheduler.xmlrpc_run, port=xmlrpc_port, bind=xmlrpc_host)
+```
+
+再贴一下utils里面的代码
+
+```python
+def run_in_thread(func, *args, **kwargs):
+    """Run function in thread, return a Thread object"""
+    from threading import Thread
+    thread = Thread(target=func, args=args, kwargs=kwargs)
+    thread.daemon = True
+    thread.start()
+    return thread
+```
+
+## fetcher()
+
+
 
 ## all()
 开线程，调度上述所有模块
