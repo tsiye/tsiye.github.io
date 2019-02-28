@@ -35,7 +35,8 @@ http请求交由tornado框架中的httpclient完成，这个client是异步的�
 
 # run.py
 先从主项目的入口点开始分析。
-首先进行配置的读取，数据库的连接，远程服务器的连接。
+
+## cli()
 函数cli()做了一些准备工作
 其创建了一个字典，放入了连接数据库`taskdb`，`projectdb`，`resultdb`的环境变量，message queue的环境信息，将'newtask_queue', 'status_queue', 'scheduler2fetcher', 'fetcher2processor', 'processor2result'放在其中，还创建好了phantomjs的信息，存储在ctx.obj中
 ```python
@@ -49,6 +50,13 @@ g = ctx.obj
 g.instances.append(fetcher)
 ```
 基本上就做好了一系列的配置
+
+最后调用all函数
+```python
+if ctx.invoked_subcommand is None and not ctx.obj.get('testing_mode'):
+        ctx.invoke(all)#调用all()函数
+    return ctx
+```
 
 ## scheduler()
 1. 一开始先`load_cls`,看到定义
@@ -90,7 +98,7 @@ kwargs = dict(taskdb=g.taskdb, projectdb=g.projectdb, resultdb=g.resultdb,
     scheduler.FAIL_PAUSE_NUM = fail_pause_num
 ```
 
-3. 如果有xmlrpc的话开一个线程run起来～，这个应该是针对命令行来说，webUI不影响
+3. 如果有xmlrpc的话开一个线程run起来～，可以看到scheduler()是支持分布式部署的
 ```python
 if xmlrpc:
         utils.run_in_thread(scheduler.xmlrpc_run, port=xmlrpc_port, bind=xmlrpc_host)
@@ -109,16 +117,59 @@ def run_in_thread(func, *args, **kwargs):
 ```
 
 ## fetcher()
+与`scheduler()`类似，初始化了`fetcher()`,根据需要使用`phantomjs`和`splash`解析动态网页。
+可以看到fetcher()是支持分布式部署的。
 
+## processor()
+与上面类似，`fetcher()`爬取的数据传入`processor()`,run()
 
+## result worker()
+与上面类似
+
+##webui()
+webui是一个基于flask写的界面。
+首先还是从context中加载各项属性进入`app.config`
+
+## phantomjs()
+著名的无头浏览器，一系列配置，之后调用
 
 ## all()
-开线程，调度上述所有模块
+开线程或子进程，调度上述所有模块
+```python
+if run_in == 'subprocess' and os.name != 'nt':
+        run_in = utils.run_in_subprocess
+    else:
+        run_in = utils.run_in_thread
+
+```
+
+```python
+#utils.py
+def run_in_thread(func, *args, **kwargs):
+    """Run function in thread, return a Thread object"""
+    from threading import Thread
+    thread = Thread(target=func, args=args, kwargs=kwargs)
+    thread.daemon = True
+    thread.start()
+    return thread
+
+
+def run_in_subprocess(func, *args, **kwargs):
+    """Run function in subprocess, return a Process object"""
+    from multiprocessing import Process
+    thread = Process(target=func, args=args, kwargs=kwargs)
+    thread.daemon = True
+    thread.start()
+    return thread
+```
 
 ## bench()
 在bench模式下，仅仅使用在内存中的数据库，而非存储在硬盘的数据库，可以看到其中并没有连接数据库的命令。
 
 ## one()
-所有任务都放在一个进程下进行，用tornado.ioloop循环处理。
-debug用
+> One mode not only means all-in-one, it runs every thing in one process over
+    tornado.ioloop, for debug purpose
+
+
+
 	
