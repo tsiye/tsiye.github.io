@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 内存数据库和磁盘数据库的对比
-category: database
+title: 数据库-内存数据库和磁盘数据库的对比
+category: 理解向
 tags: database
 ---
 #### 在阅读pyspider时发现作者binux区分了两者的概念，特地一探究竟。

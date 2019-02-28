@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Python中yield的使用 
-category: language 
+title: 语言-Python-yield的使用 
+category: 技术向 
 tags: Python 
 keywords: Python,yield
 ---

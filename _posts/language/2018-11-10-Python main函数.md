@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Python main函数
-category: language
+title: 语言-Python-main函数
+category: 技术向
 tags: Python
 syntax: gruvbox
 ---

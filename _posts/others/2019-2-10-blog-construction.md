@@ -1,3 +1,11 @@
+---
+layout: post
+title: 本技术博客的搭建
+category: 应用向
+tags: blog
+keywords: blog
+---
+
 # 建立技术博客的一些过程
 > 技术博客肯定是要越简单越好，再加上自己的时间也有限，就先从最容易搭建的github pages开始，建立博客。
 

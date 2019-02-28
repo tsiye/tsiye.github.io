@@ -1,7 +1,7 @@
 ---
 layout: post
-title: pyspider源码阅读2 app.py
-category: web
+title: 源码阅读-pyspider源码阅读2 app.py
+category: 理解向
 tags: spider
 description: 阅读pyspider
 ---

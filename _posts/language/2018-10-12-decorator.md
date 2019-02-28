@@ -1,7 +1,7 @@
 ---
 layout: post
-title: decorator 装饰器
-category: language
+title: 语言-Python-decorator 装饰器
+category: 技术向
 tags: Python
 ---
 

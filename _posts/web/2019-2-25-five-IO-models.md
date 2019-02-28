@@ -1,7 +1,7 @@
 ---
 layout: post
-title: linux五种IO模型 
-category: web
+title: 网络&操作系统-linux五种IO模型
+category: 理解向
 tags: [web,OS]
 ---
 ## 用户空间和内核空间

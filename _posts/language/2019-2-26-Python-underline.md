@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Python 下划线汇总
-category: language
+title: 语言-Python-下划线汇总
+category: 技术向
 tags: Python
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Python click包
-category: language
+title: 语言-Python-click包
+category: 技术向
 tags: Python
 syntax: gruvbox
 ---

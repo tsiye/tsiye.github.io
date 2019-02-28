@@ -1,7 +1,7 @@
 ---
 layout: post
-title: IO多路复用 select poll epoll 
-category: web
+title: 网络&操作系统-IO多路复用 select poll epoll 
+category: 理解向
 tags: [web,OS]
 ---
 ## IO多路复用复习

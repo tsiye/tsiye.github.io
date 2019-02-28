@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 异步，同步，阻塞，非阻塞 
-category: web
+title: 网络&操作系统-异步，同步，阻塞，非阻塞 
+category: 理解向
 tags: [web,OS]
 ---
 
