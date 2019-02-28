@@ -11,6 +11,7 @@ tags: [Python, metaclass]
 2. 你可以拷贝它
 3. 你可以为它增加属性
 4. 你可以将它作为函数参数进行传递
+
 ```python
 >>> print ObjectCreator     # 你可以打印一个类，因为它其实也是一个对象
 <class '__main__.ObjectCreator'>
