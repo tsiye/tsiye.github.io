@@ -162,6 +162,7 @@ def run_in_subprocess(func, *args, **kwargs):
     thread.start()
     return thread
 ```
+最后用`quit()`调用click的方法关掉所有线程
 
 ## bench()
 在bench模式下，仅仅使用在内存中的数据库，而非存储在硬盘的数据库，可以看到其中并没有连接数据库的命令。
