@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 网络-spider lab2
-category: 项目
+category: 技术向
 tags: spider
 ---
 
