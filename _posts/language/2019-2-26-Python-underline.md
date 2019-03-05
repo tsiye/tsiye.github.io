@@ -9,7 +9,9 @@ tags: Python
 > 下划线前缀的含义是告知其他程序员：以单个下划线开头的变量或方法仅供内部使用。 该约定在PEP 8中有定义。 它通常不由Python解释器强制执行，仅仅作为一种对程序员的提示。
 
 ## 单末尾下划线 var_
+
 > 单个末尾下划线（后缀）是一个约定，用来避免与Python关键字产生命名冲突。 PEP 8解释了这个约定。
+
 ```python
 >>> def make_object(name, class):
 SyntaxError: "invalid syntax"
@@ -37,7 +39,7 @@ AttributeError: "'ManglingTest' object has no attribute '__mangled'"
 ```
 
 ## 双前导和双末尾下划线 __var__
-Python保留了有双前导和双末尾下划线的名称，用于特殊用途。 这样的例子有，__init__对象构造函数，或__call__ --- 它使得一个对象可以被调用。
+Python保留了有双前导和双末尾下划线的名称，用于特殊用途。 这样的例子有，`__init__`对象构造函数，或`__call__` --- 它使得一个对象可以被调用。
 
 这些dunder方法通常被称为神奇方法 - 但Python社区中的许多人（包括我自己）都不喜欢这种方法。
 

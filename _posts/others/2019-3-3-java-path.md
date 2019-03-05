@@ -15,6 +15,7 @@ JDK用来编译Java的源码(sourcecode，.java文件)，变成字节码(byte co
 如果安装了JDK，电脑中就会有两套JRE。JAVA_HOME下的JRE是给jdk里用java编写的工具用的。另一个则是普通java文件使用。JRE中包含了虚拟机(JVM)，库函数以及运行Java程序所必须的文件。
 - JVM
 Java virtual machine
+
 ![[pic2](https://i.loli.net/2019/03/03/5c7b7ba927540.png)
 
 ## Java编译过程
