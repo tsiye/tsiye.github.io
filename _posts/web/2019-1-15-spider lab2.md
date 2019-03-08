@@ -30,6 +30,7 @@ text返回的是unicode类型的数据
 服务器根据cookies中的session ID去数据库中查询，解析出用户名就知道是哪个用户的请求了
 - session 的运行依赖 session ID，而 session ID 是存在 cookie 中的
 - session ID是有过期时间的
+
 ### session实现
 通常session cookie是不能跨窗口使用的，当你新开了一个浏览器窗口进入相同页面时，系统会赋予你一个新的sessionid，这样我们信息共享的目的就达不到了，此时我们可以先把sessionid保存在persistent cookie中，然后在新窗口中读出来，就可以得到上一个窗口SessionID了，这样通过session cookie和persistent cookie的结合我们就实现了跨窗口的session tracking（会话跟踪）。            在一些web开发的书中，往往只是简单的把Session和cookie作为两种并列的http传送信息的方式，session cookies位于服务器端，persistent cookie位于客户端，可是session又是以cookie为基础的，明白的两者之间的联系和区别，我们就不难选择合适的技术来开发web service了。
 ### 本次模拟登陆的实现过程
