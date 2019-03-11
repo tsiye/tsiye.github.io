@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ps & top
+title: 操作系统-ps & top
 category: 应用向
 tags: [bash]
 ---
