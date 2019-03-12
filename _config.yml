@@ -4,7 +4,7 @@ email: yeyuan1489@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   池元烨的博客
 baseurl: "" # the subpath of your site, e.g. /blog/
-#url: http://chiyuanye.com # the base hostname & protocol for your site
+url: http://chiyuanye.com # the base hostname & protocol for your site
 rss_url: /pages/feed.xml
 author: Chi Yuanye
 
@@ -22,8 +22,8 @@ avatar: https://i.loli.net/2019/02/20/5c6cf0e7a42f9.jpg
 favicon: https://i.loli.net/2019/02/20/5c6cf0555ffe6.jpeg
 
 # disqus config
-#disqus:
-#  shortname: chiyuanye
+disqus:
+  shortname: chiyuanye
 
 # google analytics config
 ga:
