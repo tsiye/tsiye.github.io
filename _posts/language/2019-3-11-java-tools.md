@@ -132,9 +132,10 @@ s.substring(beginIndex, endIndex) //从特定位置beginIndex到下标为endInde
 
 #### 获取子字符(串)的位置
 ![indexOf](https://i.loli.net/2019/03/11/5c85f11c239a8.png)
-#### String和数字之间的相互转化
+#### String和其他类型的相互转化
 - string转数字 `int intValue = Integer.parseInt(intString)`,`double doubleValue = Double.parseDouble(doubleString)`
 - 数字转int `String s = number + ""`
+- 转字符数组 1`toCharArray()`
 
 #### 字符串的替换与分隔
 ```java
