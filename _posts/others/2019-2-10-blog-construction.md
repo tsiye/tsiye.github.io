@@ -21,6 +21,23 @@ keywords: blog
 ## what remains
 有些遗憾的是,由于GFW，disqus功能只有科学上网才能看到，想用自己在东京的服务器做一个反向代理。主要思路是利用那个服务器调用disqus的API，将请求参数发送过来，在本地自己另建一个评论框，实现评论功能。主要是自己前端啥也不会，这个要自己设计一个评论框就很僵硬。等以后再说吧。
 
+## 境外vps利用nginx部署
+服务器上先clone下来，再用nginx。
+主要卡在一个nginx配置文件上。注意server_name，应该用公网ip。
+```
+server {
+  listen  80;
+  server_name 155.138.230.57;
+  root /root/tsiye.github.io/_site;
+
+  location / {
+    index index.html;
+  }
+}
+
+```
+还有就是nginx的user应该改成root，我一直没动，导致一直不行。
+
 ## reference
 [Jekyll使用Rouge主题](https://my.oschina.net/u/934002/blog/871586)
 
