@@ -26,4 +26,4 @@ keywords: zsh
 
 
 ## reference
-1. [zsh || bash 快捷键](https://www.jianshu.com/p/eeee90f27bcc)
+1. [zsh,bash 快捷键](https://www.jianshu.com/p/eeee90f27bcc)
