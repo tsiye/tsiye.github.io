@@ -1,8 +1,8 @@
 ---
 layout: post
-title: zsh快捷键
+title: zsh-快捷键
 category: 应用向
-keywords: zsh
+tags: zsh
 ---
 
 `⌃ + a`：移动到行首
