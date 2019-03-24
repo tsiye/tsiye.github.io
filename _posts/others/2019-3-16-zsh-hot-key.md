@@ -27,3 +27,4 @@ tags: zsh
 
 ## reference
 1. [zsh,bash 快捷键](https://www.jianshu.com/p/eeee90f27bcc)
+2. [Ubuntu常用快捷键总结](https://blog.csdn.net/yzhang6_10/article/details/69569468)
