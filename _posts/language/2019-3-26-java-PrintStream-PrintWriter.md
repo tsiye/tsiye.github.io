@@ -55,7 +55,7 @@ FilterOutputStream
 FilterInputStream和FilterOutputStream是用来提供装饰器接口来控制特定输入流的两个类，分别从IO类的基类InputStream和OutputStream派生而来。
 我们来看一下两个装饰器类。
 
-1. FilterInputStream
+- FilterInputStream
 ```java
 DataInputStream
 //功能:与DataOutputStream搭配使用，这样可以按照可移植的方式从流中读取基本数据类型(int, char, long)。
@@ -69,8 +69,8 @@ LineNumberInputStream
 PushBackInputStream
 //功能:能弹出一个字节的缓冲区。因此可以将读到的最后一个字符回退。
 //构造器参数以及如何使用: InputStream。通常是编译器的扫描器，可能永远不会用到。
-
-2. FilterOutputStream
+```
+- FilterOutputStream
 ```java
 DataOutputStream
 //功能:与DataIntputStream搭配使用，这样可以按照可移植的方式向流中基本数据类型(int, char, long)。
