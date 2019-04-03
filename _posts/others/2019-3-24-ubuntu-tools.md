@@ -18,6 +18,7 @@ sudo apt-get install kazam
 更新源：sudo apt-get update
 安装：sudo apt-get install simplescreenrecorder
 ``` 
+
 ## 计算器
 > 做结构化学的计算题没带计算器实在是太尬了，手算是不可能的。
 
