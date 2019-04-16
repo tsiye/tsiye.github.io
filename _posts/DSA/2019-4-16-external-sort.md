@@ -128,4 +128,4 @@ tags: [algorithm, external sort]
 ## reference
 1. Java程序语言设计第十版
 
-[点击下载完整代码](/downloads/SortLargeFile.java)
+<a href="/downloads/SortLargeFile.java" download>点击下载完整代码</a>
