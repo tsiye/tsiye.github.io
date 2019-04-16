@@ -38,6 +38,10 @@ server {
 ```
 还有就是nginx的user应该改成root，我一直没动，导致一直不行。
 
+## 设置文件下载
+`<a href="/downloads/SortLargeFile.java" download>点击下载完整代码</a>`
+a标签加上download属性即可
+
 ## reference
 [Jekyll使用Rouge主题](https://my.oschina.net/u/934002/blog/871586)
 
