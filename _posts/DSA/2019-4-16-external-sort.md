@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 算法-外部排序
+title: 算法-外部排序1
 category: 算法
 tags: [algorithm, external sort]
 ---
@@ -14,7 +14,7 @@ tags: [algorithm, external sort]
 ![externalSort1.png](https://i.loli.net/2019/04/16/5cb57d38883bf.png)
 
 ### 阶段二
-将每对有序分段(比如S1和S2，S3和S4...)，归并到一个大一些的有序分段中，并将新分段存储到新的临时文件中。继续同样的过程知道得到仅仅一个有序分段。
+将每对有序分段(比如S1和S2，S3和S4...)，归并到一个大一些的有序分段中，并将新分段存储到新的临时文件中。继续同样的过程直到得到仅仅一个有序分段。
 ![externalSort2.png](https://i.loli.net/2019/04/16/5cb57d3899bb9.png)
 
 ## 实现阶段1
