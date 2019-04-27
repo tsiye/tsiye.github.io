@@ -67,6 +67,43 @@ tags: [algorithm, external sort]
 ## 多相归并
 在有些情况下，多相归并比较好用。对于k路归并，多路归并需要K文件，多相归并只需要3个，但是会增加IO次数，每次都要将文件的一般复制到一个空的文件中。
 
+[Polyphase merge sort](https://en.wikipedia.org/wiki/Polyphase_merge_sort)
+
+英文的Wiki上有较为详细的说明。
+
+After the initial distribution, an ordinary merge sort using 4 files will sort 16 single record runs in 4 iterations of the entire dataset, moving a total of 64 records in order to sort the dataset after the initial distribution. A polyphase merge sort using 4 files will sort 17 single record runs in 4 iterations, but since each iteration but the last iteration only moves a fraction of the dataset, it only moves a total of 48 records in order to sort the dataset after the initial distribution. In this case, ordinary merge sort factor is 2.0, while polyphase overall factor is ~2.73.
+
+To explain how the reduction factor is related to sort performance, the reduction factor equations are:
+
+```
+reduction_factor = exp(number_of_runs*log(number_of_runs)/run_move_count)
+run_move_count = number_of_runs * log(number_of_runs)/log(reduction_factor)
+run_move_count = number_of_runs * log_reduction_factor(number_of_runs)
+```
+Using the run move count equation for the above examples:
+
+![externalsort7.png](https://i.loli.net/2019/04/27/5cc3b4cabdad5.png)
+Here is a table of effective reduction factors for polyphase and ordinary merge sort listed by number of files, based on actual sorts of a few million records. This table roughly corresponds to the reduction factor per dataset moved tables shown in fig 3 and fig 4 of polyphase merge sort.pdf
+```
+# files
+|     average fraction of data per iteration
+|     |     polyphase reduction factor on ideal sized data
+|     |     |     ordinary reduction factor on ideal sized data
+|     |     |     |
+3     .73   1.94  1.41  (sqrt  2)
+4     .63   2.68  2.00
+5     .58   3.20  2.45  (sqrt  6)
+6     .56   3.56  3.00
+7     .55   3.80  3.46  (sqrt 12)
+8     .54   3.95  4.00
+9     .53   4.07  4.47  (sqrt 20)
+10    .53   4.15  5.00
+11    .53   4.22  5.48  (sqrt 30)
+12    .53   4.28  6.00
+32    .53   4.87 16.00
+```
+**In general, polyphase merge sort is better than ordinary merge sort when there are less than 8 files, while ordinary merge sort starts to become better at around 8 or more files.**
+
 ## reference
 1. [选择置换+败者树搞定外部排序](https://blog.csdn.net/liangyixin19800304/article/details/12458811)
 2. [一眨眼的功夫了解什么是外部排序算法](http://data.biancheng.net/view/76.html)
