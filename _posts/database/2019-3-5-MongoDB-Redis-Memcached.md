@@ -5,7 +5,7 @@ category: 技术向
 tags: [MongoDB, redis, Memcached, database]
 ---
 
-今天要讨论的是三者者是not only spl,其中Redis和Mencached是键值存储数据库，mongodb是文档型数据库。
+今天要讨论的是三者都是not only spl,其中Redis和Mencached是键值存储数据库，mongodb是文档型数据库。
 
 ## Memcached和Redis
 [也谈谈 Redis 和 Memcached 的区别](http://blog.jobbole.com/101496/)

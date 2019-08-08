@@ -1,0 +1,185 @@
+---
+layout: post
+title: SpringBoot-打包插件
+category: 技术向
+tags: [SpringBoot]
+---
+
+> appassembler-maven-plugin会生成shell脚本，并且根据配置文件将一些文件输出到指定的几个文件夹，通常生成的脚本放到bin目录下，配置文件在conf目录下，用到的jar包在lib目录下，最后还有一个存日志的log目录;maven-assembly-plugin把这些打成一个压缩包
+
+## 配置
+`pom.xml`里加
+```xml
+<build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>1.10</version>
+                <configuration>
+                    <configurationDirectory>conf</configurationDirectory>
+                    <configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
+                    <copyConfigurationDirectory>true</copyConfigurationDirectory>
+                    <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+                    <useWildcardClassPath>true</useWildcardClassPath>
+                    <repositoryLayout>flat</repositoryLayout>
+                    <repositoryName>lib</repositoryName>
+                    <binFileExtensions>
+                        <unix>.sh</unix>
+                    </binFileExtensions>
+                    <daemons>
+                        <daemon>
+                            <mainClass>com.example.mybatispostgres.MybatispostgresApplication</mainClass>
+                            <commandLineArguments>
+                                <commandLineArgument>argument_one</commandLineArgument>
+                            </commandLineArguments>
+                            <jvmSettings>
+                                <maxMemorySize>2048</maxMemorySize>
+                            </jvmSettings>
+                            <generatorConfigurations>
+                                <generatorConfiguration>
+                                    <generator>jsw</generator>
+                                    <includes>
+                                        <include>linux-x86-32</include>
+                                        <include>linux-x86-64</include>
+                                        <include>windows-x86-32</include>
+                                        <include>windows-x86-64</include>
+                                        <include>macosx-universal-32</include>
+                                        <include>macosx-universal-64</include>
+                                    </includes>
+                                    <configuration>
+                                        <property>
+                                            <name>configuration.directory.in.classpath.first</name>
+                                            <value>conf</value>
+                                        </property>
+                                        <property>
+                                            <name>wrapper.logfile</name>
+                                            <value>logs/demo.log</value>
+                                        </property>
+                                        <property>
+                                            <name>wrapper.console.format</name>
+                                            <value>PTM</value>
+                                        </property>
+                                        <property>
+                                            <name>wrapper.logfile.format</name>
+                                            <value>PTM</value>
+                                        </property>
+                                        <property>
+                                            <name>wrapper.logfile.maxsize</name>
+                                            <value>10m</value>
+                                        </property>
+                                        <property>
+                                            <name>wrapper.logfile.maxfiles</name>
+                                            <value>5</value>
+                                        </property>
+                                    </configuration>
+                                </generatorConfiguration>
+                            </generatorConfigurations>
+                            <platforms>
+                                <platform>jsw</platform>
+                            </platforms>
+                            <id>demo</id>
+                        </daemon>
+                    </daemons>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>build-deploy-dir</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>generate-daemons</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.5.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <finalName>demo</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptors>
+                        <descriptor>src/main/resources/assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+  
+```
+`assembly.xml`里加
+```xml
+<assembly
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+        xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2
+  http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+
+    <id>bin</id>
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <fileSets>
+        <fileSet>
+            <directory>target/generated-resources/appassembler/jsw/demo/lib</directory>
+            <outputDirectory>lib</outputDirectory>
+            <excludes>
+                <exclude>maven-metadata-appassembler.xml</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>target/generated-resources/appassembler/jsw/demo/conf</directory>
+            <outputDirectory>conf</outputDirectory>
+            <filtered>true</filtered>
+            <includes>
+                <include>wrapper.conf</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>target/classes</directory>
+            <outputDirectory>conf</outputDirectory>
+            <filtered>true</filtered>
+            <excludes>
+                <exclude>com/</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>target/generated-resources/conf</directory>
+            <outputDirectory>conf</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>target/generated-resources/appassembler/jsw/demo/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <fileMode>0755</fileMode>
+            <lineEnding>keep</lineEnding>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/shell</directory>
+            <outputDirectory>bin</outputDirectory>
+            <fileMode>0755</fileMode>
+            <lineEnding>keep</lineEnding>
+        </fileSet>
+        <fileSet>
+            <directory>target/generated-resources/appassembler/jsw/demo/bin</directory>
+            <outputDirectory>logs</outputDirectory>
+            <excludes>
+                <exclude>*</exclude>
+            </excludes>
+        </fileSet>
+    </fileSets>
+</assembly>
+```
+## 部署
+1. 在文件夹下用`mvn clean install`生成tar.gz包
+2. `scp target/his-monitor-v2.tar.gz root@47.102.149.227:~`类似命令上传至服务器
+3. `tar -xzvf test.tar.gz -C /opt/`解压至目标文件夹
+4. 在bin目录下启动脚本`./his-monitor-v2 start`，完成服务器的访问
